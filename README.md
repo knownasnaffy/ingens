@@ -1,4 +1,8 @@
-# ingens
+# Ingens
+
+A discord bot for an educational server
+
+## Development
 
 To install dependencies:
 
@@ -6,10 +10,8 @@ To install dependencies:
 bun install
 ```
 
-To run:
+To start in development mode:
 
 ```bash
-bun run index.ts
+bun run dev
 ```
-
-This project was created using `bun init` in bun v1.1.9. [Bun](https://bun.sh) is a fast all-in-one JavaScript runtime.
