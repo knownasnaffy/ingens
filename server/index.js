@@ -1,4 +1,4 @@
-import fs from 'node:fs/promises'
+import fs from 'fs/promises'
 import express from 'express'
 
 // Constants
@@ -37,7 +37,7 @@ if (!isProduction) {
 // Serve HTML
 app.use('*all', async (req, res) => {
   try {
-    const url = req.originalUrl.replace(base, '')
+    const url = req.originalUrl.replace(base, '/..')
 
     let template
     let render
