@@ -7,6 +7,7 @@ const { token } = require("../config.json");
 // Create a new client instance
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
+// Register Commands
 client.commands = new Collection();
 
 const foldersPath = path.join(__dirname, "commands");
@@ -31,11 +32,26 @@ for (const folder of commandFolders) {
   }
 }
 
+// Cooldowns collection
 client.cooldowns = new Collection();
 
-// When the client is ready, run this code (only once).
-// The distinction between `client: Client<boolean>` and `readyClient: Client<true>` is important for TypeScript developers.
-// It makes some properties non-nullable.
+// Setup Database
+const { dbURI } = require("../config.json");
+
+const mongoose = require("mongoose");
+const { StudyGroupSchema } = require("../db/schemas/studyGroup");
+const { default: chalk } = require("chalk");
+
+await mongoose
+  .connect(dbURI)
+  .then(() =>
+    console.log(chalk.green("✓ Database Ready!"), "Connected to MongoDB")
+  );
+
+const StudyGroup = mongoose.model("StudyGroup", StudyGroupSchema);
+const database = { StudyGroup };
+
+// Register Events
 const eventsPath = path.join(__dirname, "events");
 const eventFiles = fs
   .readdirSync(eventsPath)
@@ -47,7 +63,7 @@ for (const file of eventFiles) {
   if (event.once) {
     client.once(event.name, (...args) => event.execute(...args));
   } else {
-    client.on(event.name, (...args) => event.execute(...args));
+    client.on(event.name, (...args) => event.execute(...args, database));
   }
 }
 
