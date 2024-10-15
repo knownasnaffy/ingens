@@ -1,4 +1,4 @@
-const { SlashCommandBuilder } = require("discord.js");
+const { SlashCommandBuilder, PermissionFlagsBits } = require("discord.js");
 
 module.exports = {
   category: "utility",
@@ -10,7 +10,8 @@ module.exports = {
         .setName("command")
         .setDescription("The command to reload.")
         .setRequired(true)
-    ),
+    )
+    .setDefaultMemberPermissions(PermissionFlagsBits.Administrator),
   async execute(interaction) {
     const commandName = interaction.options
       .getString("command", true)
