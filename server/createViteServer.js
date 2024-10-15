@@ -1,10 +1,7 @@
 import fs from "fs/promises";
-import express from "express";
-import chalk from "chalk";
 
 // Constants
 const isProduction = process.env.NODE_ENV === "production";
-const port = process.env.PORT || 5173;
 const base = process.env.BASE || "/";
 
 // Cached production assets
@@ -15,9 +12,8 @@ const ssrManifest = isProduction
   ? await fs.readFile("./dist/client/.vite/ssr-manifest.json", "utf-8")
   : undefined;
 
-// Create http server
-const app = express();
-
+export default async function createViteServer(app) {
+    
 // Add Vite or respective production middlewares
 let vite;
 if (!isProduction) {
@@ -65,12 +61,4 @@ app.use("*all", async (req, res) => {
     res.status(500).end(e.stack);
   }
 });
-
-// Start http server
-app.listen(port, () => {
-  console.log(
-    chalk.green("✓ Server started!"),
-    "Available at",
-    chalk.underline(`http://localhost:${port}`)
-  );
-});
+}
