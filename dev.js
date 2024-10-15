@@ -22,7 +22,7 @@ function startScript() {
   });
 
   childProcess.exited.then(code => {
-    console.log(chalk.yellow(`Script exited with code ${code}`));
+    console.log(chalk.yellow(`● Script exited with code ${code}`));
   });
 }
 
@@ -32,10 +32,10 @@ startScript();
 // Listen for user input
 rl.on('line', (input) => {
   if (input === 'r') {
-    console.log(chalk.yellow('Restarting the script...'));
+    console.log(chalk.yellow('● Restarting the script...'));
     startScript(); // Restart the script
   } else if (input === 'q') {
-    console.log(chalk.yellow('Exiting...'));
+    console.log(chalk.yellow('● Exiting...'));
     rl.close();
     if (childProcess) {
       childProcess.kill(); // Kill the running child process
