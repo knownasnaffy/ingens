@@ -20,6 +20,6 @@
       "noUnusedParameters": true,
       "noFallthroughCasesInSwitch": true
     },
-    "include": ["client"],
+    "include": ["client", "tailwind.config.ts"],
     "references": [{ "path": "./tsconfig.node.json" }]
   }
