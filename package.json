@@ -3,7 +3,8 @@
   "module": "index.js",
   "type": "module",
   "scripts": {
-    "dev": "bun --watch --bun index.js",
+    "dev": "bun --bun index.js",
+    "dev:watch": "bun --watch --bun index.js",
     "start": "NODE_ENV=production bun --bun index.js",
     "build:client": "vite build --outDir dist/client --ssrManifest",
     "build:server": "vite build --outDir dist/server --ssr client/entry-server.tsx",
