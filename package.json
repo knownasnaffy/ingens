@@ -6,6 +6,7 @@
     "dev": "bun --bun dev.js",
     "dev:watch": "bun --watch --bun index.js",
     "start": "NODE_ENV=production bun --bun index.js",
+    "start:db": "cd \"C:/Program Files/MongoDB/Server/8.0/bin\" && ./mongod.exe --dbpath \"C:/Program Files/MongoDB/Server/8.0/data/db\" --port 8486",
     "build:client": "vite build --outDir dist/client --ssrManifest",
     "build:server": "vite build --outDir dist/server --ssr client/entry-server.tsx",
     "build": "bun run build:client && bun run build:server"
