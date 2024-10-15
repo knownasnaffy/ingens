@@ -6,6 +6,6 @@ module.exports = {
   name: Events.ClientReady,
   once: true,
   execute(client) {
-    console.log(chalk.green("Bot ready!"), `Logged in as ${chalk.bold(client.user.tag)}`);
+    console.log(chalk.green("✓ Bot ready!"), `Logged in as ${chalk.bold(client.user.tag)}`);
   },
 };

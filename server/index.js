@@ -69,7 +69,7 @@ app.use("*all", async (req, res) => {
 // Start http server
 app.listen(port, () => {
   console.log(
-    chalk.green("Server started!"),
+    chalk.green("✓ Server started!"),
     "Available at",
     chalk.underline(`http://localhost:${port}`)
   );
