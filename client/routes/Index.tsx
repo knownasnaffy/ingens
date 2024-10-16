@@ -1,4 +1,5 @@
 import DiscordLogoWhite from "../assets/discord-logo-white.svg";
+import { Link } from "react-router-dom";
 
 function Index() {
   return (
@@ -12,13 +13,13 @@ function Index() {
           <span className="bg-green-400 h-fit rounded-full p-1.5 mr-2 translate-y-0.5"></span>
           Ingens#9193
         </h1>
-        <a
-          href="/login"
+        <Link
+          to="/login"
           className="inline-flex items-center gap-2 w-fit py-2 text-lg mt-2 px-4 rounded-md bg-indigo-800 text-white"
         >
           Login with
           <img src={DiscordLogoWhite} alt="Discord" className="h-5" />
-        </a>
+        </Link>
       </div>
     </>
   );

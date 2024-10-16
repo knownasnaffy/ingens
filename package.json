@@ -34,6 +34,7 @@
     "compression": "^1.7.4",
     "discord.js": "^14.16.3",
     "express": "^5.0.1",
+    "lucide-react": "^0.453.0",
     "mongoose": "^8.7.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
