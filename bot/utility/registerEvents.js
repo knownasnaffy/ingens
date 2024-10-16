@@ -1,7 +1,7 @@
 const fs = require("fs");
 const path = require("path");
 
-export default function registerEvents(client, database) {
+export default function registerEvents(client) {
   const eventsPath = path.join(__dirname, "../events");
   const eventFiles = fs
     .readdirSync(eventsPath)
@@ -13,7 +13,7 @@ export default function registerEvents(client, database) {
     if (event.once) {
       client.once(event.name, (...args) => event.execute(...args));
     } else {
-      client.on(event.name, (...args) => event.execute(...args, database));
+      client.on(event.name, (...args) => event.execute(...args));
     }
   }
 }

@@ -2,7 +2,7 @@ const { Events, Collection } = require("discord.js");
 
 module.exports = {
   name: Events.InteractionCreate,
-  async execute(interaction, database) {
+  async execute(interaction) {
     if (!interaction.isChatInputCommand()) return;
 
     const command = interaction.client.commands.get(interaction.commandName);
@@ -43,7 +43,7 @@ module.exports = {
     setTimeout(() => timestamps.delete(interaction.user.id), cooldownAmount);
 
     try {
-      await command.execute(interaction, database);
+      await command.execute(interaction);
     } catch (error) {
       console.error(error);
       if (interaction.replied || interaction.deferred) {

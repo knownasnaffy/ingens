@@ -1,4 +1,5 @@
 const { SlashCommandBuilder } = require("discord.js");
+const { StudyGroup } = require("../../../db/schemas/studyGroup");
 
 module.exports = {
   category: "studyGroup",
@@ -29,9 +30,7 @@ module.exports = {
         .setDescription("Should new users require approval to join the study group?")
         .setRequired(true)
     ),
-  async execute(interaction, database) {
-    const { StudyGroup } = database;
-
+  async execute(interaction) {
     const studyGroup = new StudyGroup({
       name: interaction.options.getString('name'),
       description: interaction.options.getString('description'),

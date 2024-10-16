@@ -20,6 +20,4 @@ export const StudyGroupSchema = new Schema({
   },
 });
 
-const StudyGroup = mongoose.model("StudyGroup", StudyGroupSchema);
-
-export default StudyGroup;
+export const StudyGroup = mongoose.model("StudyGroup", StudyGroupSchema);
