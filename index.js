@@ -1,22 +1,39 @@
-import createViteServer from "./server/createViteServer";
-import express from "express";
-import chalk from "chalk";
+const { Client, Collection, GatewayIntentBits } = require("discord.js");
+const { default: chalk } = require("chalk");
+const { default: registerCommands } = require("./bot/utility/registerCommands");
+const { default: registerEvents } = require("./bot/utility/registerEvents");
 
-const port = process.env.PORT || 5173;
+// Create a new client instance
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
-// Create http server
-const app = express();
+// Register Commands
+registerCommands(client);
 
-// Create frontend using vite
-createViteServer(app);
+// Setup Database
+const dbURI = process.env.DATABASE_URI;
 
-// Start http server
-app.listen(port, () => {
+const mongoose = require("mongoose");
+const { StudyGroupSchema } = require("./db/schemas/studyGroup");
+
+try {
+  await mongoose
+    .connect(dbURI)
+    .then(() =>
+      console.log(chalk.green("✓ Database Ready!"), "Connected to MongoDB")
+    );
+} catch {
   console.log(
-    chalk.green("✓ Server started!"),
-    "Available at",
-    chalk.underline(`http://localhost:${port}`)
+    chalk.red("⨉ Error!"),
+    "Failed to establish a connection with MongoDB"
   );
-});
+}
 
-import "./bot";
+const StudyGroup = mongoose.model("StudyGroup", StudyGroupSchema);
+const database = { StudyGroup };
+
+// Register Events
+registerEvents(client, database);
+
+// Log in to Discord with your client's token
+const token = process.env.BOT_TOKEN;
+client.login(token);
