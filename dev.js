@@ -1,9 +1,12 @@
-import { spawn } from 'bun';
-import chalk from 'chalk';
-import readline from 'readline';
+import { spawn } from "bun";
+import chalk from "chalk";
+import readline from "readline";
 
 // Initialize readline to capture input
-const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
+const rl = readline.createInterface({
+  input: process.stdin,
+  output: process.stdout,
+});
 
 let childProcess;
 
@@ -15,12 +18,12 @@ function startScript() {
 
   // Spawn the script using Bun
   childProcess = spawn({
-    cmd: ['bun', '--bun', 'index.js'], // Adjust the script filename as needed
-    stdout: 'inherit',
-    stderr: 'inherit'
+    cmd: ["bun", "--bun", "index.js"], // Adjust the script filename as needed
+    stdout: "inherit",
+    stderr: "inherit",
   });
 
-  childProcess.exited.then(code => {
+  childProcess.exited.then((code) => {
     console.log(chalk.yellow(`● Script exited with code ${code}`));
   });
 }
@@ -29,12 +32,12 @@ function startScript() {
 startScript();
 
 // Listen for user input
-rl.on('line', (input) => {
-  if (input === 'r') {
-    console.log(chalk.yellow('● Restarting the script...'));
+rl.on("line", (input) => {
+  if (input === "r") {
+    console.log(chalk.yellow("● Attempting to restart the script..."));
     startScript(); // Restart the script
-  } else if (input === 'q') {
-    console.log(chalk.yellow('● Exiting...'));
+  } else if (input === "q") {
+    console.log(chalk.yellow("● Exiting..."));
     rl.close();
     if (childProcess) {
       childProcess.kill(); // Kill the running child process
