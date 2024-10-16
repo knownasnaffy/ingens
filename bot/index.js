@@ -15,17 +15,24 @@ const dbURI = process.env.DATABASE_URI;
 const mongoose = require("mongoose");
 const { StudyGroupSchema } = require("../db/schemas/studyGroup");
 
-await mongoose
-  .connect(dbURI)
-  .then(() =>
-    console.log(chalk.green("✓ Database Ready!"), "Connected to MongoDB")
+try {
+  await mongoose
+    .connect(dbURI)
+    .then(() =>
+      console.log(chalk.green("✓ Database Ready!"), "Connected to MongoDB")
+    );
+} catch {
+  console.log(
+    chalk.red("⨉ Error!"),
+    "Failed to establish a connection with MongoDB"
   );
+}
 
 const StudyGroup = mongoose.model("StudyGroup", StudyGroupSchema);
 const database = { StudyGroup };
 
 // Register Events
-registerEvents(client, database)
+registerEvents(client, database);
 
 // Log in to Discord with your client's token
 const token = process.env.BOT_TOKEN;
