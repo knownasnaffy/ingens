@@ -1,3 +1,5 @@
+import chalk from "chalk";
+
 const dbURI = process.env.DATABASE_URI;
 
 const mongoose = require("mongoose");
