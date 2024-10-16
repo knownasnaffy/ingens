@@ -1,10 +1,9 @@
 import { spawn } from 'bun';
 import chalk from 'chalk';
-import { stdin as input, stdout as output } from 'node:process';
-import readline from 'node:readline';
+import readline from 'readline';
 
 // Initialize readline to capture input
-const rl = readline.createInterface({ input, output });
+const rl = readline.createInterface({ input: process.stdin, output: process.stdout });
 
 let childProcess;
 
