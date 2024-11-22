@@ -1,11 +1,6 @@
 import mongoose from "mongoose";
+import { UserSchema } from "./user";
 const { Schema } = mongoose;
-
-export const UserSchema = new Schema({
-  _id: Number,
-  name: String,
-  updatedAt: { type: Date },
-});
 
 export const StudyGroupSchema = new Schema({
   channelId: Number,
